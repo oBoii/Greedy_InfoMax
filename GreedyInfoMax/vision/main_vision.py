@@ -1,6 +1,7 @@
 import torch
 import time
 import numpy as np
+import gc
 
 #### own modules
 from GreedyInfoMax.utils import logger
@@ -44,6 +45,13 @@ def train(opt, model):
 
     starttime = time.time()
     cur_train_module = opt.train_module
+
+    print("XXXXXXXXXXXXXXXX")
+    print("XXXXXXXXXXXXXXXX")
+    print(opt.num_epochs, opt.start_epoch)
+    print("XXXXXXXXXXXXXXXX")
+    print("XXXXXXXXXXXXXXXX")
+    print("XXXXXXXXXXXXXXXX")
 
     for epoch in range(opt.start_epoch, opt.num_epochs + opt.start_epoch):
 
@@ -102,6 +110,14 @@ def train(opt, model):
 
 if __name__ == "__main__":
 
+
+    # added myself
+    torch.cuda.empty_cache()
+    gc.collect()
+
+
+    # --grayscale --download_dataset --save_dir vision_experiment
+
     opt = arg_parser.parse_args()
     arg_parser.create_log_path(opt)
     opt.training_dataset = "unlabeled"
@@ -118,6 +134,11 @@ if __name__ == "__main__":
     model, optimizer = load_vision_model.load_model_and_optimizer(opt)
 
     logs = logger.Logger(opt)
+
+    print("XXXXXXXXXXXXXXXXXXX")
+    print(opt)
+    print(opt.batch_size_multiGPU)
+    print("XXXXXXXXXXXXXXXXXXX")
 
     train_loader, _, supervised_loader, _, test_loader, _ = get_dataloader.get_dataloader(
         opt

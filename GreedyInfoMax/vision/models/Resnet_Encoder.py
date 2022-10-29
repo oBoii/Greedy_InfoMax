@@ -157,8 +157,10 @@ class ResNet_Encoder(nn.Module):
                 .unfold(3, self.patch_size, self.patch_size // self.overlap)
                 .permute(0, 2, 3, 1, 4, 5)
             )
+
             n_patches_x = x.shape[1]
             n_patches_y = x.shape[2]
+
             x = x.reshape(
                 x.shape[0] * x.shape[1] * x.shape[2], x.shape[3], x.shape[4], x.shape[5]
             )

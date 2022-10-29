@@ -62,18 +62,19 @@ def get_stl10_dataloader(opt):
 
     # default dataset loaders
     train_loader = torch.utils.data.DataLoader(
-        train_dataset, batch_size=opt.batch_size_multiGPU, shuffle=True, num_workers=16
+        train_dataset, batch_size=opt.batch_size_multiGPU, shuffle=True, num_workers=1
     )
 
     unsupervised_loader = torch.utils.data.DataLoader(
         unsupervised_dataset,
-        batch_size=opt.batch_size_multiGPU,
+        batch_size=12,
+        # batch_size=opt.batch_size_multiGPU, # org 32
         shuffle=True,
-        num_workers=16,
+        num_workers=1,
     )
 
     test_loader = torch.utils.data.DataLoader(
-        test_dataset, batch_size=opt.batch_size_multiGPU, shuffle=False, num_workers=16
+        test_dataset, batch_size=opt.batch_size_multiGPU, shuffle=False, num_workers=1
     )
 
     # create train/val split
@@ -88,7 +89,7 @@ def get_stl10_dataloader(opt):
                 train_dataset,
                 batch_size=opt.batch_size_multiGPU,
                 sampler=train_sampler,
-                num_workers=16,
+                num_workers=1,
             )
 
         elif opt.training_dataset == "unlabeled":
@@ -99,7 +100,7 @@ def get_stl10_dataloader(opt):
                 unsupervised_dataset,
                 batch_size=opt.batch_size_multiGPU,
                 sampler=train_sampler,
-                num_workers=16,
+                num_workers=1,
             )
 
         else:
@@ -117,7 +118,7 @@ def get_stl10_dataloader(opt):
             test_dataset,
             batch_size=opt.batch_size_multiGPU,
             sampler=valid_sampler,
-            num_workers=16,
+            num_workers=1,
         )
 
     else:

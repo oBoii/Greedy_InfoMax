@@ -18,7 +18,7 @@ def parse_general_args(parser):
         help="Boolean to decide whether to download the dataset to train on (only tested for STL-10)",
     )
     parser.add_option(
-        "--num_epochs", type="int", default=300, help="Number of Epochs for Training"
+        "--num_epochs", type="int", default=2, help="Number of Epochs for Training"
     )
     parser.add_option("--seed", type="int", default=2, help="Random seed for training")
     parser.add_option("--batch_size", type="int", default=32, help="Batchsize")

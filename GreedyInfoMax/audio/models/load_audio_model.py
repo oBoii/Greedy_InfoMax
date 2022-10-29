@@ -1,6 +1,4 @@
 import torch
-import torch.nn as nn
-import os
 
 from GreedyInfoMax.audio.models import full_model
 from GreedyInfoMax.utils import model_utils
