@@ -38,7 +38,9 @@ def validate(opt, model, test_loader):
 
 
 def train(opt, model):
+    # todo: remove
     total_step = len(train_loader)
+    # total_step = len(train_loader)
     model.module.switch_calc_loss(True)
 
     print_idx = 100
@@ -58,7 +60,13 @@ def train(opt, model):
         loss_epoch = [0 for _ in range(opt.model_splits)]
         loss_updates = [1 for _ in range(opt.model_splits)]
 
+      
         for step, (img, label) in enumerate(train_loader):
+            
+            # todo
+            if step == 400:
+                break
+            # end todo
 
             if step % print_idx == 0:
                 print(

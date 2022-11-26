@@ -67,7 +67,7 @@ def get_stl10_dataloader(opt):
 
     unsupervised_loader = torch.utils.data.DataLoader(
         unsupervised_dataset,
-        batch_size=12,
+        batch_size=8,
         # batch_size=opt.batch_size_multiGPU, # org 32
         shuffle=True,
         num_workers=1,
@@ -83,6 +83,14 @@ def get_stl10_dataloader(opt):
 
         if opt.training_dataset == "train":
             dataset_size = len(train_dataset)
+
+            print("AAAAAAAAAAAAAAAA")
+            print(dataset_size)
+            print("AAAAAAAAAAAAAAAA")
+            # TODO: remove
+            dataset_size = dataset_size // 100
+            print(dataset_size)
+
             train_sampler, valid_sampler = create_validation_sampler(dataset_size)
 
             train_loader = torch.utils.data.DataLoader(
