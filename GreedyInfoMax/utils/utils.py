@@ -47,7 +47,7 @@ def scatter(opt, x, colors, label):
     # We create a scatter plot.
     plt.figure(figsize=(8, 8))
     ax = plt.subplot(aspect="equal")
-    ax.scatter(x[:, 0], x[:, 1], lw=0, s=40, c=palette[colors.ravel().astype(np.int)])
+    ax.scatter(x[:, 0], x[:, 1], lw=0, s=40, c=palette[colors.ravel().astype(np.int64)])
     plt.xlim(-25, 25)
     plt.ylim(-25, 25)
     ax.axis("off")

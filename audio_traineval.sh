@@ -1,5 +1,3 @@
-#!/bin/sh
-
 echo "Training the Greedy InfoMax Model on audio data (librispeech)"
 python -m GreedyInfoMax.audio.main_audio --subsample --num_epochs 1000 --learning_rate 2e-4 --start_epoch 0 -i ./datasets/ -o . --save_dir audio_experiment
 

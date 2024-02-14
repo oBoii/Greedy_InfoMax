@@ -8,7 +8,7 @@ import numpy as np
 import random
 
 def default_loader(path):
-    return torchaudio.load(path, normalization=False)
+    return torchaudio.load(path)
 
 
 def default_flist_reader(flist):

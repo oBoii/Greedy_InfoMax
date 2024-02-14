@@ -208,7 +208,7 @@ class InfoNCE_Loss(loss.Loss):
             z_neg = None
 
         for k in range(1, self.opt.prediction_step + 1):
-            z_k = z[:, k:, :]
+            z_k = z[:, k:, :] # when k = 1, z_k is z from the second time-step to the last
             Wc_k = Wc[:, :-k, (k - 1) * self.enc_hidden : k * self.enc_hidden]
 
             z_k = self.broadcast_batch_length(z_k)

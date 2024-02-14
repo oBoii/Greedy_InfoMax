@@ -53,6 +53,7 @@ def makeDeltaOrthogonal(weights, gain):
 
 def reload_weights(opt, model, optimizer, reload_model):
     ## reload weights for training of the linear classifier
+    # model_type 0: train clas
     if (opt.model_type == 0) and reload_model:  # or opt.model_type == 2)
         print("Loading weights from ", opt.model_path)
 

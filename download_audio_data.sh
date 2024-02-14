@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 echo "Downloading audio datasets:"
 mkdir datasets
 cd datasets || exit
