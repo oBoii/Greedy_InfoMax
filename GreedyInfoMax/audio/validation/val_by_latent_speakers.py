@@ -52,12 +52,13 @@ def val_by_latent_speakers(opt, dataset, model, epoch, step):
 
             counter += 1
 
-    for idx, layers in enumerate(model.module.fullmodel):
-        utils.fit_TSNE_and_plot(
-            opt,
-            big_feature_space[idx],
-            speaker_labels[idx],
-            "{}_{}_model_{}".format(epoch, step, idx),
-        )
+    # TODO temprorarily disabled
+    # for idx, layers in enumerate(model.module.fullmodel):
+    #     utils.fit_TSNE_and_plot(
+    #         opt,
+    #         big_feature_space[idx],
+    #         speaker_labels[idx],
+    #         "{}_{}_model_{}".format(epoch, step, idx),
+    #     )
 
     model.train()
