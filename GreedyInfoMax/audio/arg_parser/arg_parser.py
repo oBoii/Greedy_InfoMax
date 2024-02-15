@@ -24,6 +24,8 @@ def parse_args():
     (opt, _) = parser.parse_args()
 
     opt.time = time.ctime()
+    # replace ":" with "_" to avoid problems with saving files in windows
+    opt.time = opt.time.replace(":", "_")
 
     # Device configuration
     opt.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")

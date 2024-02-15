@@ -8,7 +8,7 @@ import numpy as np
 import random
 
 def default_loader(path):
-    return torchaudio.load(path)
+    return torchaudio.load(path, normalize=False)
 
 
 def default_flist_reader(flist):
@@ -68,7 +68,7 @@ class LibriDataset(Dataset):
 
         audio = (audio - self.mean) / self.std
 
-        return audio, filename, speaker_id, start_idx
+        return audio, filename, speaker_id
 
     def __len__(self):
         return len(self.file_list)
@@ -81,7 +81,7 @@ class LibriDataset(Dataset):
         batch_size = min(len(self.speaker_dict[speaker_id]), batch_size)
         batch = torch.zeros(batch_size, 1, self.audio_length)
         for idx in range(batch_size):
-            batch[idx, 0, :], _, _, _ = self.__getitem__(
+            batch[idx, 0, :], _, _, = self.__getitem__(
                 self.speaker_dict[speaker_id][idx]
             )
 

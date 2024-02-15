@@ -111,7 +111,7 @@ class IndependentModule(nn.Module):
 
         return c, z
 
-    def forward(self, x, filename=None, start_idx=None):
+    def forward(self, x, filename=None):
         """
         combines all the operations necessary for calculating the loss and accuracy of the network given the input
         :param x: batch with sampled audios (dimensions: B x C x L)
@@ -122,7 +122,7 @@ class IndependentModule(nn.Module):
         """
 
         c, z = self.get_latents(x)  # B x L x C
-        total_loss, accuracies = self.loss.get_loss(x, z, c, filename, start_idx)
+        total_loss, accuracies = self.loss.get_loss(x, z, c, filename)
 
         # for multi-GPU training
         total_loss = total_loss.unsqueeze(0)

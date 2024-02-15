@@ -115,7 +115,7 @@ class FullModel(nn.Module):
         else:
             raise Exception("Invalid option for opt.model_splits")
 
-    def forward(self, x, filename=None, start_idx=None, n=6):
+    def forward(self, x, filename=None, n=6):
         model_input = x
 
         cur_device = utils.get_device(self.opt, x)
@@ -127,7 +127,7 @@ class FullModel(nn.Module):
         if n == 6:  # train all layers at once
             for idx, layer in enumerate(self.fullmodel):
                 loss[:, idx], accuracy[:, idx], _, z = layer(
-                    model_input, filename, start_idx
+                    model_input, filename
                 )
                 model_input = z.permute(0, 2, 1).detach()
         else:

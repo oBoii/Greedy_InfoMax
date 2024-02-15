@@ -34,7 +34,7 @@ class Speaker_Loss(loss.Loss):
         for idx, key in enumerate(train_dataset.speaker_dict):
             self.speaker_id_dict[key] = idx
 
-    def get_loss(self, x, z, c, filename, start_idx):
+    def get_loss(self, x, z, c, filename):
         total_loss, accuracies = self.calc_supervised_speaker_loss(c, filename)
         return total_loss, accuracies
 

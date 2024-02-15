@@ -26,7 +26,7 @@ def train(opt, model):
 
         loss_epoch = [0 for _ in range(opt.model_splits)]
 
-        for step, (audio, filename, _, start_idx) in enumerate(train_loader):
+        for step, (audio, filename, _) in enumerate(train_loader):
 
             # validate training progress by plotting latent representation of various speakers
             if step % latent_val_idx == 0:
@@ -49,7 +49,7 @@ def train(opt, model):
 
             model_input = audio.to(opt.device)
 
-            loss = model(model_input, filename, start_idx, n=opt.train_layer)
+            loss = model(model_input, filename, n=opt.train_layer)
             loss = torch.mean(loss, 0)  # average over the losses from different GPUs
 
             model.zero_grad()

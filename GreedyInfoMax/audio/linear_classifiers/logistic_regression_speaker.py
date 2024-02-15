@@ -16,7 +16,7 @@ def train(opt, context_model, loss):
     for epoch in range(opt.num_epochs):
         loss_epoch = 0
         acc_epoch = 0
-        for i, (audio, filename, _, audio_idx) in enumerate(train_loader):
+        for i, (audio, filename, _) in enumerate(train_loader):
 
             starttime = time.time()
 
@@ -33,7 +33,7 @@ def train(opt, context_model, loss):
             z = z.detach()
 
             # forward pass
-            total_loss, accuracies = loss.get_loss(model_input, z, z, filename, audio_idx)
+            total_loss, accuracies = loss.get_loss(model_input, z, z, filename)
 
             # Backward and optimize
             optimizer.zero_grad()
@@ -70,7 +70,7 @@ def test(opt, context_model, loss, data_loader):
     loss_epoch = 0
 
     with torch.no_grad():
-        for i, (audio, filename, _, audio_idx) in enumerate(data_loader):
+        for i, (audio, filename, _) in enumerate(data_loader):
 
             loss.zero_grad()
 
@@ -85,7 +85,7 @@ def test(opt, context_model, loss, data_loader):
             z = z.detach()
 
             # forward pass
-            total_loss, step_accuracy = loss.get_loss(model_input, z, z, filename, audio_idx)
+            total_loss, step_accuracy = loss.get_loss(model_input, z, z, filename)
 
             accuracy += step_accuracy.item()
             loss_epoch += total_loss.item()
