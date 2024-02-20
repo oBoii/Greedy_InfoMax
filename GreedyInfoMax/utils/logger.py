@@ -45,15 +45,15 @@ class Logger:
         assert self.num_models_to_keep > 0, "Dont delete all models!!!"
 
     def create_log(
-        self,
-        model,
-        accuracy=None,
-        epoch=0,
-        optimizer=None,
-        final_test=False,
-        final_loss=None,
-        acc5=None,
-        classification_model=None,
+            self,
+            model,
+            accuracy=None,
+            epoch=0,
+            optimizer=None,
+            final_test=False,
+            final_loss=None,
+            acc5=None,
+            classification_model=None,
     ):
 
         print("Saving model and log-file to " + self.opt.log_path)
@@ -147,9 +147,13 @@ class Logger:
                 cur_file.write(" Very Final testing top 5 - accuracy: " + str(acc5))
 
         # Save losses throughout training and plot
-        np.save(
-            os.path.join(self.opt.log_path, "train_loss"), np.array(self.train_loss)
-        )
+        # ADDED MYSELF
+        if isinstance(self.train_loss[0], list):
+            max_len = max(map(len, self.train_loss))
+            padded_train_loss = np.array([i + [0] * (max_len - len(i)) for i in self.train_loss])
+            np.save(os.path.join(self.opt.log_path, "train_loss"), padded_train_loss)
+        else:
+            np.save(os.path.join(self.opt.log_path, "train_loss"), np.array(self.train_loss))
 
         if self.val_loss is not None:
             np.save(
@@ -171,8 +175,8 @@ class Logger:
             plt.plot(lst_iter, np.array(loss), "-b", label="train loss")
 
             if (
-                self.loss_last_training is not None
-                and len(self.loss_last_training) > idx
+                    self.loss_last_training is not None
+                    and len(self.loss_last_training) > idx
             ):
                 lst_iter = np.arange(len(self.loss_last_training[idx]))
                 plt.plot(lst_iter, self.loss_last_training[idx], "-g")
