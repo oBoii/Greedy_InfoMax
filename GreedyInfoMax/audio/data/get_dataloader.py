@@ -12,7 +12,12 @@ def get_libri_dataloaders(opt):
     :return: train_loader, train_dataset,
     test_loader, test_dataset - corresponds to validation or test set depending on opt.validate
     """
-    num_workers = 16
+
+    num_cpus = os.cpu_count()
+
+    num_workers = num_cpus - 1 if num_cpus > 1 else 1  # old: #1 #16
+
+    print("num_workers: ", num_workers)
 
     if opt.validate:
         print("Using Train / Val Split")
