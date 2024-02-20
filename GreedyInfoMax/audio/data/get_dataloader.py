@@ -3,15 +3,6 @@ import os
 
 from GreedyInfoMax.audio.data import librispeech
 
-def get_cpu_count():
-    try:
-        with open('/sys/fs/cgroup/cpuset/cpuset.cpus', 'r') as f:
-            cpu_info = f.read()
-        return len(cpu_info.split(','))
-    except FileNotFoundError:
-        # Fallback to os.cpu_count() if the file doesn't exist
-        return os.cpu_count()
-
 def get_libri_dataloaders(opt):
     """
     creates and returns the Libri dataset and dataloaders,
@@ -21,7 +12,7 @@ def get_libri_dataloaders(opt):
     test_loader, test_dataset - corresponds to validation or test set depending on opt.validate
     """
 
-    num_cpus = get_cpu_count()
+    num_cpus = 8
     #os.cpu_count()
 
     num_workers = num_cpus - 1 if num_cpus > 1 else 1  # old: #1 #16
