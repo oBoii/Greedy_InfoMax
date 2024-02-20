@@ -76,7 +76,7 @@ def train(opt, phone_dict, context_model, model):
             sample_loss = loss.item()
             loss_epoch += sample_loss
 
-            if i % 10 == 0:
+            if i % 1000 == 0:
                 print(
                     "Epoch [{}/{}], Step [{}/{}], Time (s): {:.1f}, Accuracy: {:.4f}, Loss: {:.4f}".format(
                         epoch + 1,
